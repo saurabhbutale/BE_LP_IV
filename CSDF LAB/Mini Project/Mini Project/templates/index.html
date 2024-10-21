@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Forensics Tool</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Audio Forensics Tool</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="audiofile">Select an Audio File:</label>
+        <input type="file" name="audiofile" id="audiofile" required>
+        <br><br>
+        <button type="submit">Upload and Analyze</button>
+    </form>
+
+    {% if result %}
+        <h2>Analysis Result</h2>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Duration</td>
+                <td>{{ result.duration }}</td>
+            </tr>
+            <tr>
+                <td>Mean Amplitude</td>
+                <td>{{ result.mean_amplitude }}</td>
+            </tr>
+            <tr>
+                <td>Number of Channels</td>
+                <td>{{ result.n_channels }}</td>
+            </tr>
+            <tr>
+                <td>RMS Energy</td>
+                <td>{{ result.rms_energy }}</td>
+            </tr>
+            <tr>
+                <td>Sample Rate</td>
+                <td>{{ result.sample_rate }}</td>
+            </tr>
+            <tr>
+                <td>Metadata (Channels)</td>
+                <td>{{ result.metadata.channels }}</td>
+            </tr>
+            <tr>
+                <td>Metadata (Frame Rate)</td>
+                <td>{{ result.metadata.frame_rate }}</td>
+            </tr>
+            <tr>
+                <td>Metadata (Sample Width)</td>
+                <td>{{ result.metadata.sample_width }}</td>
+            </tr>
+            <tr>
+                <td>Metadata (Duration in Seconds)</td>
+                <td>{{ result.metadata.duration_seconds }}</td>
+            </tr>
+        </table>
+    {% endif %}
+</body>
+</html>

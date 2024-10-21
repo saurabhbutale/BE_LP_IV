@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Analysis Result</h1>
+        
+        <!-- Audio Analysis Result -->
+        <table>
+            <tr>
+                <th>Duration (seconds)</th>
+                <td>{{ result['duration'] }}</td>
+            </tr>
+            <tr>
+                <th>Mean Amplitude</th>
+                <td>{{ result['mean_amplitude'] }}</td>
+            </tr>
+            <tr>
+                <th>Metadata</th>
+                <td>
+                    <ul>
+                        <li>Channels: {{ result['metadata']['channels'] }}</li>
+                        <li>Frame Rate: {{ result['metadata']['frame_rate'] }}</li>
+                        <li>Sample Width: {{ result['metadata']['sample_width'] }}</li>
+                        <li>Duration (seconds): {{ result['metadata']['duration_seconds'] }}</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Display Waveform Image -->
+        <h2>Waveform</h2>
+        <img src="{{ url_for('static', filename='uploads/' + result['waveform_image'].split('/')[-1]) }}" alt="Waveform">
+
+        <!-- Original Audio Playback -->
+        <h2>Original Audio</h2>
+        <audio controls>
+            <source src="{{ url_for('static', filename='uploads/' + result['original_file'].split('/')[-1]) }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <!-- Noise-Reduced Audio Playback -->
+        <h2>Noise-Reduced Audio</h2>
+        <audio controls>
+            <source src="{{ audio_file_url }}" type="audio/wav">
+            Your browser does not support the audio element.
+          </audio>
+          
+    </div>
+</body>
+</html>

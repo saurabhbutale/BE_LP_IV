@@ -1,0 +1,2 @@
+Natural Language Processing is a field of Artificial Intelligence that enables machines to understand, interpret, and generate human language.
+It is the driving force behind many applications, such as text classification, sentiment analysis, and machine translation.
